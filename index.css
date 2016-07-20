@@ -1,0 +1,191 @@
+img{
+		width: 100%;
+	}
+	.hide{
+		display: none;
+	}
+
+@keyframes warn {
+            0% {
+                transform: scale(0);
+                opacity: 0.0;
+            }
+            25% {
+                transform: scale(0);
+                opacity: 0.1;
+            }
+            50% {
+                transform: scale(0.1);
+                opacity: 0.3;
+            }
+            75% {
+                transform: scale(0.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.0;
+            }
+        }
+
+
+        .container {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 40%;
+        }
+        /* 保持大小不变的小圆圈  */
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            left: 26px;
+            top: 26px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border: 2px solid red;
+            border-radius: 20px;
+            z-index: 2;
+            cursor: pointer;
+        }
+        /* 产生动画（向外扩散变大）的圆圈  */
+        .pulse {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            left: 12px;
+            top: 12px;
+            border: 6px solid red;
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;
+            border-radius: 30px;
+            z-index: 1;
+            opacity: 0;
+            -webkit-animation: warn 2s ease-out;
+            -moz-animation: warn 2s ease-out;
+            animation: warn 2s ease-out;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+        }
+
+.viewport-ver {
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    position: absolute;
+}
+.paper{
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    height: 186px;
+}
+.ver {
+    -webkit-backface-visibility: hidden;
+    /*-webkit-transform: translateY(-100px);*/ /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
+    backface-visibility: hidden;
+  /*  transform: translateY(-100px);*/
+}
+.ver.out {
+    -webkit-transform: rotateX(-90deg) scale(.9);
+    -webkit-animation-name: verouttoleft;
+    -webkit-animation-duration: 1000ms;
+    transform: rotateX(-90deg) scale(.9);
+    transform-origin:top top;
+    animation-name: verouttoleft;
+    animation-duration: 1000ms;
+}
+.ver.in {
+    -webkit-animation-name: verintoright;
+    -webkit-animation-duration: 1200ms;
+    animation-name: verintoright;
+    animation-duration: 1200ms;
+}
+.ver.out.reverse {
+    -webkit-transform: rotateX(90deg) scale(.9);
+    -webkit-animation-name: verouttoright;
+    transform: rotateX(90deg) scale(.9);
+    animation-name: verouttoright;
+}
+.ver.in.reverse {
+    -webkit-animation-name: verintoleft;
+    animation-name: verintoleft;
+}
+@-webkit-keyframes verouttoleft {
+    from { -webkit-transform: rotateX(0); }
+    to { -webkit-transform: rotateX(-90deg) scale(.9); }
+}
+@keyframes verouttoleft {
+    from { transform: rotateX(0); }
+    to { transform: rotateX(-90deg) scale(.9); }
+}
+@-webkit-keyframes verouttoright {
+    from { -webkit-transform: rotateY(0) ; }
+    to { -webkit-transform: rotateY(90deg) scale(.9); }
+}
+@keyframes verouttoright {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(90deg) scale(.9); }
+}
+@-webkit-keyframes verintoleft {
+    from { -webkit-transform: rotateX(-90deg) scale(.9); }
+    to { -webkit-transform: rotateX(0); }
+}
+@keyframes verintoleft {
+    from { transform: rotateX(-90deg) scale(.9); }
+    to { transform: rotateX(0); }
+}
+@-webkit-keyframes verintoright {
+    from { -webkit-transform: rotateX(90deg) scale(.9); }
+    to { -webkit-transform: rotateX(0); }
+}
+@keyframes verintoright {
+    from { transform: rotateX(90deg) scale(.9); }
+    to { transform: rotateX(0); }
+}
+.fly{
+    -webkit-animation-name: flyout;
+    -webkit-animation-duration: 1000ms;
+    animation-name: flyout;
+    animation-duration: 1000ms;
+}
+.fly-stop{
+    z-index:2;
+    top:0;
+    width: 500px;
+    height: 500px;
+    left:-80px
+}
+.fly.wid{
+    -webkit-animation-name: flywidth;
+    -webkit-animation-duration: 1000ms;
+    animation-name: flywidth;
+    animation-duration: 1000ms;
+}
+@keyframes flyout {
+    from { 
+        position: absolute;
+        z-index: 0;
+        top: 0;
+    }
+    to {  
+    z-index:2;
+    top:-110px;
+    }
+}
+@keyframes flywidth {
+    from { 
+           z-index:2;
+          top:-110px;
+           left:0;
+        height: 186px;
+    }
+    to {  
+       z-index:2;
+        top:0;
+        left:-80px;
+        width: 500px;
+        height: 500px;
+    }
+}

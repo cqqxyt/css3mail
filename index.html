@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="animate.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <style>
+        .box {
+		    width: 355px;
+		    height: 500px;
+		    padding-top: 30px;
+		    padding-bottom: 30px;
+		    margin-left: auto;
+		    margin-right: auto;
+		    position: relative;
+		    margin-top:100px;
+		}
+		.list {
+		    position: absolute;
+		}
+		
+    </style>
+</head>
+<body>
+
+
+<div id="box" class="box viewport-flip" title="点击翻面">
+    <a href="/" class="list flip out ">
+    	 <div style="background:#e8d4b3;position:relative;">
+	    	<img src="f.png" class="xinfeng" alt="纸牌正面" style="position:relative;z-index:1;"/>
+	    	<img class="xinfeng back_gai ver " src="back-gai.png"  style="position: absolute;top: -114px;z-index:1;" />
+	    	<img class="xinfeng back_top ver out" src="back-top.png"style="position: absolute;top: -105px;z-index:1;" />
+    	 	<img src="paper.jpg"  class="paper"  />
+	    </div>
+    </a>
+    <a href="/" class="list flip"><img src="front.jpg" alt="纸牌背面" /></a>
+
+    <div class="container">
+	    <div class="dot"></div>
+	    <div class="pulse"></div>
+	</div>
+</div>
+
+<script type="text/javascript" src="https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/jquery/jquery-1.10.2.min_f2fb5194.js"></script>
+<script type="text/javascript">
+
+	var eleBack = null, eleFront = null,
+    // 纸牌元素们 
+    eleList = $(".list");
+
+	// 确定前面与后面元素
+	var funBackOrFront = function() {
+	    eleList.each(function() {
+	        if ($(this).hasClass("out")) {
+	            eleBack = $(this);
+	        } else {
+	            eleFront = $(this);
+	        }
+	    });
+	};
+	funBackOrFront();
+
+
+	$(".container").bind("click", function() {
+		$(this).hide();
+	    // 切换的顺序如下
+	    // 1. 当前在前显示的元素翻转90度隐藏, 动画时间225毫秒
+	    // 2. 结束后，之前显示在后面的元素逆向90度翻转显示在前
+	    // 3. 完成翻面效果
+	    eleFront.addClass("out").removeClass("in");
+	    
+	    setTimeout(function() {
+	    	$(".back_gai").addClass("out");
+	    	setTimeout(function(){
+	    		$(".back_top").addClass("in").removeClass("out");
+	    		setTimeout(function(){
+	    			$(".paper").addClass("fly")
+	    			setTimeout(function(){
+		    			$(".paper").addClass("wid");
+		    				setTimeout(function(){
+		    					$(".xinfeng").fadeOut();
+				    			$(".paper").addClass("fly-stop")
+				    		},1000)
+		    		},900)
+	    		},1000)
+	    	},1000)
+	        eleBack.addClass("in").removeClass("out");
+	        // 重新确定正反元素
+	        funBackOrFront();
+	    }, 225);
+	    return false;
+	});
+
+</script>
+</body>
+</html>
